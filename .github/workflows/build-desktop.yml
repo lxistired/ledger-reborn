@@ -1,0 +1,78 @@
+name: Build and test desktop packages
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    tags: ['v*']
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: ${{ matrix.target }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 40
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-15
+            target: macOS-arm64
+            python_arch: arm64
+          - os: macos-15-intel
+            target: macOS-x64
+            python_arch: x64
+          - os: windows-2022
+            target: Windows-x64
+            python_arch: x64
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          architecture: ${{ matrix.python_arch }}
+      - name: Install build dependencies in an isolated virtual environment
+        run: |
+          python -m venv work/release-build-venv
+          if [ "$RUNNER_OS" = "Windows" ]; then
+            build_python="work/release-build-venv/Scripts/python.exe"
+          else
+            build_python="work/release-build-venv/bin/python"
+          fi
+          "$build_python" -m pip install -r requirements-desktop.txt
+      - name: Run the complete public accounting and HTTP suite
+        run: |
+          if [ "$RUNNER_OS" = "Windows" ]; then
+            build_python="work/release-build-venv/Scripts/python.exe"
+          else
+            build_python="work/release-build-venv/bin/python"
+          fi
+          "$build_python" -m unittest discover -v
+          "$build_python" tests/http_smoke.py
+          "$build_python" scripts/audit_public_source.py
+      - name: Build on the target OS and smoke-test the frozen executable
+        run: |
+          if [ "$RUNNER_OS" = "Windows" ]; then
+            build_python="work/release-build-venv/Scripts/python.exe"
+          else
+            build_python="work/release-build-venv/bin/python"
+          fi
+          "$build_python" scripts/build_desktop.py --work-dir work/desktop-build --output-dir dist
+      - name: Upload tested packages and actual smoke evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: Ledger-Reborn-${{ matrix.target }}
+          path: |
+            dist/*.dmg
+            dist/*portable.zip
+            dist/*Setup.exe
+            dist/frozen-smoke-*.json
+            dist/build-manifest-*.json
+          if-no-files-found: error
+          retention-days: 14

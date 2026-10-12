@@ -1,0 +1,38 @@
+# Python and isolated build environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+*.egg-info/
+work/
+build/
+dist/
+*.spec
+
+# User company data, backups, private comparison data and generated packages
+data/
+reference/
+sources/
+*.sqlite
+*.sqlite3
+*.sqlite-wal
+*.sqlite-shm
+*.sqlite3-wal
+*.sqlite3-shm
+*.db
+*.qbw
+*.qbmac
+*.qbbackup
+*.dmg
+*.exe
+*.zip
+tests/http_smoke_result.json
+
+# Local system and editor state
+.DS_Store
+.idea/
+.vscode/
+.env
+.env.*
+!.env.example

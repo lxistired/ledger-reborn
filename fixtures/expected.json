@@ -1,0 +1,253 @@
+{
+  "provenance": {
+    "kind": "independent hand-calculated synthetic accounting golden",
+    "created_date": "2026-10-12",
+    "currency": "USD",
+    "amount_unit": "integer cents",
+    "quickbooks_original_output": false,
+    "inventory_policy": "perpetual moving weighted average; round each cost-of-sale HALF_UP to cents; divide remaining carrying amount by remaining units for next sale",
+    "accounting_basis": "accrual"
+  },
+  "inventory_sale_costs_cents": [
+    96000,
+    48000,
+    40615,
+    27077
+  ],
+  "inventory_movements": [
+    {
+      "date": "2026-01-05",
+      "qty": "10",
+      "carrying_cents": 100000
+    },
+    {
+      "date": "2026-01-08",
+      "qty": "20",
+      "carrying_cents": 240000
+    },
+    {
+      "date": "2026-01-10",
+      "qty": "12",
+      "carrying_cents": 144000
+    },
+    {
+      "date": "2026-01-14",
+      "qty": "8",
+      "carrying_cents": 96000
+    },
+    {
+      "date": "2026-02-03",
+      "qty": "13",
+      "carrying_cents": 176000
+    },
+    {
+      "date": "2026-02-05",
+      "qty": "10",
+      "carrying_cents": 135385
+    },
+    {
+      "date": "2026-02-08",
+      "qty": "8",
+      "carrying_cents": 108308
+    }
+  ],
+  "as_of": {
+    "2026-01-20": {
+      "balances_cents": {
+        "1000": 1670000,
+        "1100": 188000,
+        "1200": 96000,
+        "1300": 120000,
+        "1500": 240000,
+        "1590": 0,
+        "2000": 170000,
+        "3000": 2000000
+      },
+      "assets_cents": 2314000,
+      "liabilities_cents": 170000,
+      "owner_equity_cents": 2000000,
+      "retained_profit_cents": 144000,
+      "revenue_cents": 338000,
+      "expenses_cents": 194000,
+      "net_income_cents": 144000
+    },
+    "2026-01-31": {
+      "balances_cents": {
+        "1000": 1458500,
+        "1100": 188000,
+        "1200": 96000,
+        "1300": 110000,
+        "1500": 240000,
+        "1590": -4000,
+        "2000": 30000,
+        "3000": 2000000
+      },
+      "assets_cents": 2088500,
+      "liabilities_cents": 30000,
+      "owner_equity_cents": 2000000,
+      "retained_profit_cents": 58500,
+      "revenue_cents": 338000,
+      "expenses_cents": 279500,
+      "net_income_cents": 58500
+    },
+    "2026-02-28": {
+      "balances_cents": {
+        "1000": 1541700,
+        "1100": 102000,
+        "1200": 108308,
+        "1300": 100000,
+        "1500": 240000,
+        "1590": -8000,
+        "2000": 25000,
+        "3000": 2000000
+      },
+      "assets_cents": 2084008,
+      "liabilities_cents": 25000,
+      "owner_equity_cents": 2000000,
+      "retained_profit_cents": 59008,
+      "revenue_cents": 525000,
+      "expenses_cents": 465992,
+      "net_income_cents": 59008
+    }
+  },
+  "periods": {
+    "2026-01": {
+      "start": "2026-01-01",
+      "end": "2026-01-31",
+      "income_by_account_cents": {
+        "4000": 248000,
+        "4100": 90000
+      },
+      "expense_by_account_cents": {
+        "5000": 144000,
+        "6100": 70000,
+        "6120": 10000,
+        "6400": 4000,
+        "6500": 1500,
+        "6300": 0,
+        "6600": 50000
+      },
+      "revenue_cents": 338000,
+      "expenses_cents": 279500,
+      "net_income_cents": 58500,
+      "budget_revenue_cents": 350000,
+      "budget_expenses_cents": 296000,
+      "budget_profit_cents": 54000,
+      "profit_variance_cents": 4500,
+      "bank_change_cents": 1458500,
+      "projects": {
+        "retail": {
+          "revenue_cents": 248000,
+          "expenses_cents": 214000,
+          "net_income_cents": 34000
+        },
+        "consulting": {
+          "revenue_cents": 90000,
+          "expenses_cents": 50000,
+          "net_income_cents": 40000
+        }
+      }
+    },
+    "2026-02": {
+      "start": "2026-02-01",
+      "end": "2026-02-28",
+      "income_by_account_cents": {
+        "4000": 122000,
+        "4100": 65000
+      },
+      "expense_by_account_cents": {
+        "5000": 67692,
+        "6100": 70000,
+        "6120": 10000,
+        "6400": 4000,
+        "6500": 1800,
+        "6300": 8000,
+        "6600": 25000
+      },
+      "revenue_cents": 187000,
+      "expenses_cents": 186492,
+      "net_income_cents": 508,
+      "budget_revenue_cents": 200000,
+      "budget_expenses_cents": 196000,
+      "budget_profit_cents": 4000,
+      "profit_variance_cents": -3492,
+      "bank_change_cents": 83200,
+      "projects": {
+        "retail": {
+          "revenue_cents": 122000,
+          "expenses_cents": 145692,
+          "net_income_cents": -23692
+        },
+        "consulting": {
+          "revenue_cents": 65000,
+          "expenses_cents": 25000,
+          "net_income_cents": 40000
+        }
+      }
+    },
+    "2026-YTD": {
+      "start": "2026-01-01",
+      "end": "2026-02-28",
+      "income_by_account_cents": {
+        "4000": 370000,
+        "4100": 155000
+      },
+      "expense_by_account_cents": {
+        "5000": 211692,
+        "6100": 140000,
+        "6120": 20000,
+        "6400": 8000,
+        "6500": 3300,
+        "6300": 8000,
+        "6600": 75000
+      },
+      "revenue_cents": 525000,
+      "expenses_cents": 465992,
+      "net_income_cents": 59008,
+      "projects": {
+        "retail": {
+          "revenue_cents": 370000,
+          "expenses_cents": 359692,
+          "net_income_cents": 10308
+        },
+        "consulting": {
+          "revenue_cents": 155000,
+          "expenses_cents": 75000,
+          "net_income_cents": 80000
+        }
+      }
+    }
+  },
+  "open_documents_cents": {
+    "2026-01-31": {
+      "invoices": {
+        "inv-retail-jan-a": 100000,
+        "inv-retail-jan-b": 88000,
+        "inv-service-jan": 0
+      },
+      "bills": {
+        "bill-stock-jan-a": 0,
+        "bill-stock-jan-b": 0,
+        "bill-service-jan": 30000
+      }
+    },
+    "2026-02-28": {
+      "invoices": {
+        "inv-retail-jan-a": 0,
+        "inv-retail-jan-b": 0,
+        "inv-service-jan": 0,
+        "inv-retail-feb-a": 52000,
+        "inv-retail-feb-b": 50000,
+        "inv-service-feb": 0
+      },
+      "bills": {
+        "bill-stock-jan-a": 0,
+        "bill-stock-jan-b": 0,
+        "bill-service-jan": 0,
+        "bill-service-feb": 25000
+      }
+    }
+  },
+  "bank_rows": 19,
+  "bank_final_cents": 1541700
+}

@@ -1,0 +1,20 @@
+date,description,amount_cents,external_id
+2026-01-02,Synthetic owner contribution,2000000,bank-owner-capital
+2026-01-03,Synthetic equipment purchase,-240000,bank-equipment
+2026-01-04,Synthetic prepaid insurance,-120000,bank-insurance-prepaid
+2026-01-15,Synthetic retail receipt partial,60000,bank-receipt-jan-retail-partial
+2026-01-18,Synthetic stock vendor payment,-100000,bank-payment-stock-jan-a
+2026-01-19,Synthetic service vendor payment partial,-20000,bank-payment-service-jan-partial
+2026-01-20,Synthetic service receipt,90000,bank-receipt-service-jan-full
+2026-01-24,Synthetic retail rent,-70000,bank-rent-jan
+2026-01-25,Synthetic stock vendor payment,-140000,bank-payment-stock-jan-b
+2026-01-31,Synthetic bank fee,-1500,bank-bank-fee-jan
+2026-02-02,Synthetic retail receipt remainder,100000,bank-receipt-jan-retail-remainder
+2026-02-03,Synthetic cash inventory purchase,-80000,bank-stock-feb-cash
+2026-02-06,Synthetic retail receipt,88000,bank-receipt-jan-retail-b-full
+2026-02-07,Synthetic service vendor remainder,-30000,bank-payment-service-jan-remainder
+2026-02-11,Synthetic service receipt,65000,bank-receipt-service-feb-full
+2026-02-15,Synthetic retail rent,-70000,bank-rent-feb
+2026-02-16,Synthetic retail receipt partial,20000,bank-receipt-feb-retail-partial
+2026-02-20,Synthetic retail supplies,-8000,bank-supplies-feb
+2026-02-28,Synthetic bank fee,-1800,bank-bank-fee-feb
