@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "files": [
+    {
+      "distribution": "pyobjc-core",
+      "version": "12.2.2",
+      "file": "pyobjc-core-12.2.2-LICENSE.txt",
+      "sha256": "0ca04b07928d4872b9d9bb22187ca0426dd8bfab08f26eada0999a71dc81aaff",
+      "source_kind": "official_release_sdist",
+      "source_url": "https://files.pythonhosted.org/packages/a5/78/abc4ce5920305780aeb36b4067a86253378b36e29ba96673a3deb02eb03a/pyobjc_core-12.2.2.tar.gz",
+      "source_artifact_sha256": "3906452339cd06a3bb07df103c2511d4cb0f7a22d8771c0b802eba15d9a642b6",
+      "source_member": "pyobjc_core-12.2.2/License.txt"
+    },
+    {
+      "distribution": "proxy-tools",
+      "version": "0.1.0",
+      "file": "proxy-tools-0.1.0-upstream-LICENSE.txt",
+      "sha256": "a428fb8a2e762af3eb0a6edbbb88e9b42ccfee80fd9b423958bcacf9b9abbfe4",
+      "source_kind": "upstream_repository_commit",
+      "source_url": "https://raw.githubusercontent.com/jtushman/proxy_tools/db43f1e35d4f90a65c5a4d56d9e9af88212ec6e6/LICENSE.txt",
+      "source_commit": "db43f1e35d4f90a65c5a4d56d9e9af88212ec6e6",
+      "note": "The installed wheel and release sdist omit license text. Installed metadata declares MIT; upstream LICENSE.txt says BSD. Both declarations are retained without resolving that difference."
+    },
+    {
+      "distribution": "pyobjc-framework-Security",
+      "version": "12.2.2",
+      "file": "pyobjc-framework-security-12.2.2-LICENSE.txt",
+      "sha256": "0ca04b07928d4872b9d9bb22187ca0426dd8bfab08f26eada0999a71dc81aaff",
+      "source_kind": "official_release_sdist",
+      "source_url": "https://files.pythonhosted.org/packages/c2/92/c304b7fc3a0fe7484a2a3cf25711e70c8fa2b6969d82f4010e35b9af2164/pyobjc_framework_security-12.2.2.tar.gz",
+      "source_artifact_sha256": "33efab1ff7d18570148f8f3ddd44eca305f733aee00b9115d5263bef81018f65",
+      "source_member": "pyobjc_framework_security-12.2.2/License.txt"
+    },
+    {
+      "distribution": "pyobjc-framework-UniformTypeIdentifiers",
+      "version": "12.2.2",
+      "file": "pyobjc-framework-uniformtypeidentifiers-12.2.2-LICENSE.txt",
+      "sha256": "0ca04b07928d4872b9d9bb22187ca0426dd8bfab08f26eada0999a71dc81aaff",
+      "source_kind": "official_release_sdist",
+      "source_url": "https://files.pythonhosted.org/packages/70/c6/31ac40c4d918baa36ca06d196bfec0f47f804a74684988cf424060469d98/pyobjc_framework_uniformtypeidentifiers-12.2.2.tar.gz",
+      "source_artifact_sha256": "12f8ba77dcc949ffb9f0f48743cae326aebec8e69cb1ac55a1d1e04dca7bd59a",
+      "source_member": "pyobjc_framework_uniformtypeidentifiers-12.2.2/License.txt"
+    }
+  ]
+}

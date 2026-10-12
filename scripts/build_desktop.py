@@ -20,6 +20,8 @@ import sys
 import tempfile
 import zipfile
 
+from collect_licenses import collect_licenses
+
 ROOT = Path(__file__).resolve().parents[1]
 PRODUCT = 'Ledger Reborn'
 VERSION = '2026.10.12-preview.1'
@@ -42,9 +44,9 @@ def icon_for_platform(work):
     return icon
 
 
-def write_spec(work,icon):
+def write_spec(work,icon,notices):
     hidden = ['webview.platforms.cocoa'] if sys.platform=='darwin' else ['webview.platforms.winforms','webview.platforms.edgechromium']
-    data = [(str(ROOT/'web'),'web'),(str(ROOT/'fixtures'),'fixtures')]
+    data = [(str(ROOT/'web'),'web'),(str(ROOT/'fixtures'),'fixtures'),(str(notices),'THIRDPARTY_NOTICES')]
     data += [(str(ROOT/name),'.') for name in ('VERSION','LICENSE') if (ROOT/name).is_file()]
     architecture = platform.machine()
     spec = work/'Ledger Reborn.spec'
@@ -143,8 +145,10 @@ def main():
     out,work = args.output_dir.resolve(),args.work_dir.resolve()
     out.mkdir(parents=True,exist_ok=True)
     work.mkdir(parents=True,exist_ok=True)
+    notices = work/'THIRDPARTY_NOTICES'
+    license_index = collect_licenses(notices)
     icon = icon_for_platform(work)
-    spec = write_spec(work,icon)
+    spec = write_spec(work,icon,notices)
     run([sys.executable,'-m','PyInstaller','--clean','--noconfirm','--distpath',out,'--workpath',work/'pyinstaller',spec],cwd=ROOT)
     app = out/(PRODUCT+'.app' if sys.platform=='darwin' else PRODUCT)
     executable = app/'Contents'/'MacOS'/PRODUCT if sys.platform=='darwin' else app/(PRODUCT+'.exe')
@@ -158,6 +162,14 @@ def main():
         info = plistlib.loads((app/'Contents'/'Info.plist').read_bytes())
         if info.get('CFBundleIdentifier')!=BUNDLE_ID:
             raise ValueError('Mac bundle identifier mismatch')
+    bundled_notices = app/'Contents'/'Resources'/'THIRDPARTY_NOTICES' if sys.platform=='darwin' else app/'_internal'/'THIRDPARTY_NOTICES'
+    if not (bundled_notices/'package-license-index.json').is_file():
+        raise ValueError('Built application is missing third-party notices')
+    for component in license_index['components']:
+        for record in component['license_files']:
+            path = bundled_notices/record['file']
+            if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest()!=record['sha256']:
+                raise ValueError(f'Bundled third-party license is missing or changed: {component["name"]}')
     packages,installer_built = [],False
     if not args.skip_package:
         if sys.platform=='darwin':
@@ -167,6 +179,7 @@ def main():
     manifest = dict(product=PRODUCT,project_number='000001',version=VERSION,platform=sys.platform,
                     architecture=arch,python_version=platform.python_version(),frozen_smoke=report.name,
                     developer_id_signed=False,notarized=False,windows_installer_built=installer_built,
+                    third_party_notices_verified=True,license_component_count=len(license_index['components']),
                     requirements={package:importlib.metadata.version(package) for package in ('pywebview','pyinstaller','Pillow')},
                     artifacts=[{'file':path.name,'bytes':path.stat().st_size,
                                 'sha256':hashlib.sha256(path.read_bytes()).hexdigest()} for path in packages])

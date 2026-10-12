@@ -61,14 +61,26 @@ class BackendHTTP(unittest.TestCase):
         self.assertFalse(self.http.books['reference'].exists())
 
     def test_reference_post_is_rejected_and_cannot_write_company_or_user_data(self):
-        self.request('GET','/api/state')
-        before = (self.data_dir/'company.sqlite').read_bytes()
-        for action in ('create_contact','post_journal','allocate_payments','load_demo'):
-            code,data = self.request('POST','/api/action?book=reference',{'action':action,'payload':{}})
-            self.assertEqual(code,403,data)
-        self.assertEqual((self.data_dir/'company.sqlite').read_bytes(),before)
+        code,before = self.request('GET','/api/state')
+        self.assertEqual(code,200,before)
+        # A prior GET can still finish its SQLite WAL checkpoint after the HTTP
+        # response arrives. File bytes are not a logical no-write invariant.
+        # Check the dispatch boundary and the complete exposed business data.
+        with patch.object(self.module,'open_book',side_effect=AssertionError('rejected action opened a ledger')) as opened:
+            for action,payload in (
+                ('create_contact',{'name':'Must not exist','kind':'customer'}),
+                ('post_journal',{'date':'2026-01-01','memo':'Must not post','lines':[
+                    {'account':'1000','debit_cents':100},{'account':'3000','credit_cents':100}]}),
+                ('allocate_payments',{}),
+                ('load_demo',{}),
+            ):
+                code,data = self.request('POST','/api/action?book=reference',{'action':action,'payload':payload})
+                self.assertEqual(code,403,data)
+            opened.assert_not_called()
         self.assertFalse((self.data_dir/'reference.sqlite').exists())
         code,state = self.request('GET','/api/state')
+        self.assertEqual(code,200,state)
+        self.assertEqual(state['data'],before['data'])
         self.assertEqual(state['data']['contacts'],[])
         self.assertEqual(state['data']['journals'],[])
 

@@ -1,0 +1,7 @@
+* text=auto eol=lf
+*.png binary
+*.ico binary
+*.icns binary
+# Golden inputs must retain exactly the frozen bytes on every platform.
+/fixtures/* -text
+/scripts/license_fallbacks/* -text

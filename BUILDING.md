@@ -41,9 +41,35 @@ python -m venv work/release-build-venv
 
 The script converts the original `assets/app-icon.png` to a native icon, freezes
 the application, runs the frozen executable's smoke test, and then packages it.
-Only the public web assets, synthetic fixtures, runtime dependencies, VERSION
-and LICENSE are included as resources. User databases and private comparison
+Only the public web assets, synthetic fixtures, runtime dependencies, VERSION,
+LICENSE and authentic third-party notices are included as resources. User databases and private comparison
 files are excluded by the build recipe.
+
+Before freezing, `scripts/collect_licenses.py` copies actual LICENSE, COPYING,
+NOTICE and copyright texts listed by each installed distribution's metadata.
+It also reads the installed Python runtime's real PSF LICENSE; the build fails
+if that text is absent. The output is `THIRDPARTY_NOTICES`, containing the
+verbatim texts, `package-license-index.json` and `build-environment-sbom.json`.
+The index retains versions, SHA256 checksums, relative source paths and roles.
+Runtime dependency candidates, build tools and other environment packages are
+classified separately; the inventory does not claim to describe every native
+system library. PyInstaller's actual COPYING text and bootloader exception are
+retained because its bootloader and runtime hooks are embedded in the app.
+
+The pyobjc-core, Security and UniformTypeIdentifiers 12.2.2 wheels and the
+proxy_tools 0.1.0 distribution omit license text.
+Version-specific copies of their authentic upstream texts are stored under
+`scripts/license_fallbacks`, with official source URLs, artifact/commit provenance
+and SHA256. These are used only when installed files omit the texts. The proxy_tools
+metadata and upstream license use different license names; both source records
+are preserved without replacing the author's text. No license text is generated
+from a short identifier. Missing runtime license text or a fallback checksum
+mismatch stops the build. Collection itself performs no network request.
+
+The notices are included in the frozen resources. Before creating a DMG or
+Windows package, the build checks every recorded notice hash inside the actual
+application. `third_party_notices_verified` in the build manifest records that
+check. This is independent of the accounting/API smoke test.
 
 macOS produces a `.app` and a DMG containing the application and an Applications
 shortcut. Windows produces a portable ZIP. If Inno Setup is found on that Windows
