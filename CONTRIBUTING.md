@@ -2,6 +2,8 @@
 
 Thank you for helping maintain Ledger Reborn. Open an issue with the specific workflow and expected accounting result before a large feature change.
 
+For a first contribution, follow the [ten-minute invoice/payment/restart walkthrough](docs/CONTRIBUTOR_WALKTHROUGH.md). It includes exact expected balances and a place to report Windows or Intel Mac build and OS details.
+
 - Keep money in integer cents and use Decimal for quantity/cost calculations.
 - Preserve transaction atomicity, period locks, bank deduplication and audit records.
 - Use synthetic fixtures; never commit a real customer ledger, credentials or proprietary vendor assets.
